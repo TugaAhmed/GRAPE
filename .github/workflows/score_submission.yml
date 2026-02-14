@@ -80,15 +80,10 @@ jobs:
       - name: Read optional meta.yaml
         id: meta
         run: |
-          TEAM="${{ steps.team.outputs.name }}"
-          # Check for meta.yaml or meta.yml in team folder
-          META=""
-          for f in submissions/inbox/${TEAM}/meta.yaml submissions/inbox/${TEAM}/meta.yml; do
-            if [ -f "$f" ]; then
-              META="$f"
-              break
-            fi
-          done
+          # Find meta.yaml anywhere in submissions/inbox
+          echo "=== All files in submissions/inbox ==="
+          find submissions/inbox -type f
+          META=$(find submissions/inbox \( -name "meta.yaml" -o -name "meta.yml" \) | head -1)
           MODEL=""
           NOTES=""
           if [ -n "$META" ]; then
@@ -99,8 +94,7 @@ jobs:
             echo "Parsed MODEL=$MODEL"
             echo "Parsed NOTES=$NOTES"
           else
-            echo "No meta.yaml found in submissions/inbox/${TEAM}/"
-            ls -la submissions/inbox/${TEAM}/ 2>/dev/null || echo "Team folder not found"
+            echo "No meta.yaml found anywhere in submissions/inbox/"
           fi
           echo "model=$MODEL" >> "$GITHUB_OUTPUT"
           echo "notes=$NOTES" >> "$GITHUB_OUTPUT"
