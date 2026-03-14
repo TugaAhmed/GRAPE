@@ -48,10 +48,15 @@ jobs:
             exit 1
           fi
           TEAM=$(echo "$ENC" | sed 's|submissions/inbox/||' | cut -d'/' -f1)
-          # If team is just the filename (no subfolder), derive from PR branch
+          # If team is just the filename (no subfolder), derive from PR branch.
+          # If branch is main/master, fall back to PR author login.
           if [[ "$TEAM" == *.enc ]]; then
             TEAM=$(echo "${{ github.head_ref }}" | sed 's|submission/||' | sed 's|inbox/||' | sed 's|/.*||')
+            if [ -z "$TEAM" ] || [ "$TEAM" = "main" ] || [ "$TEAM" = "master" ]; then
+              TEAM="${{ github.event.pull_request.user.login }}"
+            fi
           fi
+          echo "Detected TEAM=$TEAM"
           python encryption/decrypt.py "$ENC" /tmp/predictions.csv
           echo "name=$TEAM" >> "$GITHUB_OUTPUT"
 
