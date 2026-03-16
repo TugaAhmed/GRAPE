@@ -5,3 +5,4 @@ timestamp_utc,team,model,type,score,notes
 2026-03-08T18:06:22Z,peguy_team,GCN_degree,human,0.829545,3-layer GCN with node degree feature and global mean/max/sum pooling
 2026-03-11T19:49:15Z,samuel,GIN,human,0.829545,GCN and GIN layers
 2026-03-14T16:06:14Z,El-Ikram,GrapeGAT,human,0.400000,/
+2026-03-16T00:08:57Z,SanaeZR,GCN,human,0.583333,2-layer GCN
