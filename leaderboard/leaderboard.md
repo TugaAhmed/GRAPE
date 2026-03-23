@@ -10,3 +10,5 @@ This leaderboard is **auto-updated** when a submission PR is merged. For interac
 | 5 | SanaeZR | `GCN` | `human` | 0.583333 | 2026-03-16T00:08:57Z | 2-layer GCN |
 | 6 | El-Ikram | `GrapeGAT` | `human` | 0.400000 | 2026-03-14T16:06:14Z | / |
 | 6 | Maha | - | `human` | 0.400000 | 2026-03-04T14:35:23Z | this was hard |
+| 8 | Sargam1412 | `BiGCN` | - |  | 2026-03-23T13:48:19Z | - |
+| 8 | human | `0.761905` | `Data augmentation to manage small dataset` |  |  | - |
