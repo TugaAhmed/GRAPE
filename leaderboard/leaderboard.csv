@@ -7,3 +7,4 @@ timestamp_utc,team,model,type,score,notes
 2026-03-14T16:06:14Z,El-Ikram,GrapeGAT,human,0.400000,/
 2026-03-16T00:08:57Z,SanaeZR,GCN,human,0.583333,2-layer GCN
 2026-03-23T13:48:19Z,Sargam1412,BiGCN,human,0.761905,Data augmentation to manage small dataset
+2026-03-25T19:06:52Z,Mubaraq,GAT # Name of your model (optional),human,0.761905,# Brief description (optional)
