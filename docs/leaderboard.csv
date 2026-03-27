@@ -8,3 +8,4 @@ timestamp_utc,team,model,type,score,notes
 2026-03-16T00:08:57Z,SanaeZR,GCN,human,0.583333,2-layer GCN
 2026-03-23T13:48:19Z,Sargam1412,BiGCN,human,0.761905,Data augmentation to manage small dataset
 2026-03-25T19:06:52Z,Mubaraq,GAT,human,0.761905,
+2026-03-27T06:17:35Z,my-submission,GrapeGAT-Optimized,human,0.524887,Improved GAT with correct graph feature batching bidirectional edges residual connections and label smoothing
