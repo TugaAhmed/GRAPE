@@ -11,5 +11,6 @@ This leaderboard is **auto-updated** when a submission PR is merged. For interac
 | 4 | main | `DAGNet` | `human` | 0.761905 | 2026-03-07T17:24:29Z | Domain-Adversarial Graph Neural Network (DANN-GNN) for diabetic retinopathy detection on retinal vessel graphs. |
 | 7 | SanaeZR | `GCN` | `human` | 0.583333 | 2026-03-16T00:08:57Z | 2-layer GCN |
 | 8 | Idrees_Bhat | `GrapeGAT-Optimized` | `human` | 0.524887 | 2026-03-27T06:17:35Z | Improved GAT with correct graph feature batching bidirectional edges residual connections and label smoothing |
-| 9 | El-Ikram | `GrapeGAT` | `human` | 0.400000 | 2026-03-14T16:06:14Z | / |
-| 9 | Maha | - | `human` | 0.400000 | 2026-03-04T14:35:23Z | this was hard |
+| 9 | Abderrahmane | `GCN # Name of your model (optional)` | `human` | 0.488636 | 2026-03-28T17:33:09Z | 3-layer GCN (node degree as additional feature) |
+| 10 | El-Ikram | `GrapeGAT` | `human` | 0.400000 | 2026-03-14T16:06:14Z | / |
+| 10 | Maha | - | `human` | 0.400000 | 2026-03-04T14:35:23Z | this was hard |
