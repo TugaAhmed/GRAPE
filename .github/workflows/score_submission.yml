@@ -21,14 +21,10 @@ jobs:
           sparse-checkout: submissions/inbox
           sparse-checkout-cone-mode: true
 
-      - name: Copy submission into workspace
+      - name: Inspect PR submission contents
         run: |
           echo "=== PR submission contents ==="
           find pr-submission/submissions/inbox -type f 2>/dev/null
-          cp -r pr-submission/submissions/inbox/* submissions/inbox/ 2>/dev/null || true
-          rm -rf pr-submission
-          echo "=== Workspace submissions/inbox contents ==="
-          find submissions/inbox -type f 2>/dev/null
 
       - uses: actions/setup-python@v5
         with:
@@ -42,12 +38,19 @@ jobs:
         env:
           SUBMISSION_PRIVATE_KEY: ${{ secrets.SUBMISSION_PRIVATE_KEY }}
         run: |
-          ENC=$(find submissions/inbox -name "*.enc" | head -1)
-          if [ -z "$ENC" ]; then
-            echo "::error::No .enc file found in submissions/inbox/"
+          ENC_COUNT=$(find pr-submission/submissions/inbox -name "*.enc" | wc -l)
+          if [ "$ENC_COUNT" -eq 0 ]; then
+            echo "::error::No .enc file found in PR under submissions/inbox/"
             exit 1
           fi
-          TEAM=$(echo "$ENC" | sed 's|submissions/inbox/||' | cut -d'/' -f1)
+          if [ "$ENC_COUNT" -gt 1 ]; then
+            echo "::error::Found multiple .enc files in PR. Please submit exactly one encrypted file."
+            find pr-submission/submissions/inbox -name "*.enc"
+            exit 1
+          fi
+
+          ENC=$(find pr-submission/submissions/inbox -name "*.enc" | head -1)
+          TEAM=$(echo "$ENC" | sed 's|pr-submission/submissions/inbox/||' | cut -d'/' -f1)
           # If team is just the filename (no subfolder), derive from PR branch.
           # If branch is main/master, fall back to PR author login.
           if [[ "$TEAM" == *.enc ]]; then
@@ -85,12 +88,22 @@ jobs:
       - name: Read optional meta.yaml
         id: meta
         run: |
-          # Find meta.yaml anywhere in submissions/inbox
-          echo "=== All files in submissions/inbox ==="
-          find submissions/inbox -type f
-          META=$(find submissions/inbox \( -name "meta.yaml" -o -name "meta.yml" \) | head -1)
+          TEAM="${{ steps.team.outputs.name }}"
+          echo "=== All files in PR submissions/inbox ==="
+          find pr-submission/submissions/inbox -type f
+
+          META=""
+          if [ -f "pr-submission/submissions/inbox/$TEAM/meta.yaml" ]; then
+            META="pr-submission/submissions/inbox/$TEAM/meta.yaml"
+          elif [ -f "pr-submission/submissions/inbox/$TEAM/meta.yml" ]; then
+            META="pr-submission/submissions/inbox/$TEAM/meta.yml"
+          else
+            META=$(find pr-submission/submissions/inbox \( -name "meta.yaml" -o -name "meta.yml" \) | head -1)
+          fi
+
           MODEL=""
           NOTES=""
+          TYPE=""
           if [ -n "$META" ]; then
             echo "Found metadata file: $META"
             cat "$META"
