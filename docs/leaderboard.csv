@@ -11,3 +11,4 @@ timestamp_utc,team,model,type,score,notes
 2026-03-27T06:17:35Z,Idrees_Bhat,GrapeGAT-Optimized,human,0.524887,Improved GAT with correct graph feature batching bidirectional edges residual connections and label smoothing
 2026-03-28T17:33:09Z,Abderrahmane,GCN # Name of your model (optional),human,0.488636,3-layer GCN (node degree as additional feature)
 2026-03-28T17:48:44Z,AIkram,VesselGAT,human,0.761905,3-layer GAT with skip connections mean+max pooling weighted CE for class imbalance
+2026-04-02T17:05:12Z,Ignatius,GAT,human,0.659091,3-layer GAT with multi-head attention multiple pooling strategies and graph-level features.
